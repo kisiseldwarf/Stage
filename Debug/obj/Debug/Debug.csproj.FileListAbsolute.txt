@@ -1,0 +1,11 @@
+C:\Users\hadikk\Source\Repos\ClassLibrary1\Debug\bin\Debug\Debug.exe.config
+C:\Users\hadikk\Source\Repos\ClassLibrary1\Debug\bin\Debug\Debug.exe
+C:\Users\hadikk\Source\Repos\ClassLibrary1\Debug\bin\Debug\Debug.pdb
+C:\Users\hadikk\Source\Repos\ClassLibrary1\Debug\bin\Debug\ClassLibrary1.dll
+C:\Users\hadikk\Source\Repos\ClassLibrary1\Debug\bin\Debug\ClassLibrary1.pdb
+C:\Users\hadikk\Source\Repos\ClassLibrary1\Debug\obj\Debug\Debug.csprojResolveAssemblyReference.cache
+C:\Users\hadikk\Source\Repos\ClassLibrary1\Debug\obj\Debug\Debug.csproj.CoreCompileInputs.cache
+C:\Users\hadikk\Source\Repos\ClassLibrary1\Debug\obj\Debug\Debug.exe
+C:\Users\hadikk\Source\Repos\ClassLibrary1\Debug\obj\Debug\Debug.pdb
+C:\Users\hadikk\Source\Repos\ClassLibrary1\Debug\bin\Debug\ExcelDataReader.dll
+C:\Users\hadikk\Source\Repos\ClassLibrary1\Debug\bin\Debug\ExcelDataReader.xml
