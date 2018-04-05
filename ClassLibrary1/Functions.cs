@@ -42,7 +42,7 @@ namespace ClassLibrary1
             {
                 throw new Exception("Chemin incorrect");
             }
-        } //Lire XLMS
+        } //Lire CSV
 
         static public List<NotesEtudiant> ReadExcel(string path)
         {
@@ -72,31 +72,26 @@ namespace ClassLibrary1
             {
                 throw new Exception("Chemin incorrect");
             }
-        } //Lire CSV
+        } //Lire XLSX / XL..
 
-        static public void setTheNumbers(NotesEtudiant ne)
+        static public void setTheNumbers(NotesEtudiant ne, Profil profil)
         {
-            foreach (var item in ne.ListeNotesLettre)
+            if (profil == null)
+                throw new Exception("Profil est null");
+            foreach (var letter in ne.ListeNotesLettre)
             {
-                switch (item)
+                bool notFound = true;
+                foreach (var rule in profil.RulesList)
                 {
-                    case "A":
-                        ne.ListeNotesChiffre.Add(18);
-                        break;
-                    case "B":
-                        ne.ListeNotesChiffre.Add(16);
-                        break;
-                    case "C":
-                        ne.ListeNotesChiffre.Add(12);
-                        break;
-                    case "D":
-                        ne.ListeNotesChiffre.Add(7);
-                        break;
-                    case "E":
-                        ne.ListeNotesChiffre.Add(2);
-                        break;
-                    default:
-                        break;
+                    if (rule.Lettre == letter)
+                    {
+                        ne.ListeNotesChiffre.Add(rule.Chiffre);
+                        notFound = false;
+                    }
+                }
+                if(notFound == true)
+                {
+                    // TO DO : Mettre une exception ici
                 }
             }
         } //Lettre -> Notes

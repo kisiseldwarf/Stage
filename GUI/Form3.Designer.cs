@@ -1,6 +1,6 @@
 ﻿namespace GUI
 {
-    partial class Form2
+    partial class Form3
     {
         /// <summary>
         /// Required designer variable.
@@ -28,6 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.modifyButton = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.nameTextBox = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rulesIntText12 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -65,12 +69,44 @@
             this.rulesLetterText3 = new System.Windows.Forms.TextBox();
             this.rulesLetterText2 = new System.Windows.Forms.TextBox();
             this.rulesLetterText1 = new System.Windows.Forms.TextBox();
-            this.nameTextBox = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.createButton = new System.Windows.Forms.Button();
-            this.cancelButton = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(10, 221);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.TabIndex = 23;
+            this.cancelButton.Text = "Annuler";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
+            // modifyButton
+            // 
+            this.modifyButton.Location = new System.Drawing.Point(465, 221);
+            this.modifyButton.Name = "modifyButton";
+            this.modifyButton.Size = new System.Drawing.Size(75, 23);
+            this.modifyButton.TabIndex = 22;
+            this.modifyButton.Text = "Modifier";
+            this.modifyButton.UseVisualStyleBackColor = true;
+            this.modifyButton.Click += new System.EventHandler(this.modifyButton_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(12, 9);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(69, 13);
+            this.label13.TabIndex = 21;
+            this.label13.Text = "Nom du profil";
+            // 
+            // nameTextBox
+            // 
+            this.nameTextBox.Location = new System.Drawing.Point(87, 6);
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.Size = new System.Drawing.Size(267, 20);
+            this.nameTextBox.TabIndex = 20;
             // 
             // groupBox2
             // 
@@ -110,10 +146,10 @@
             this.groupBox2.Controls.Add(this.rulesLetterText3);
             this.groupBox2.Controls.Add(this.rulesLetterText2);
             this.groupBox2.Controls.Add(this.rulesLetterText1);
-            this.groupBox2.Location = new System.Drawing.Point(8, 39);
+            this.groupBox2.Location = new System.Drawing.Point(10, 32);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(530, 183);
-            this.groupBox2.TabIndex = 14;
+            this.groupBox2.TabIndex = 19;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Regles";
             // 
@@ -357,7 +393,6 @@
             this.rulesLetterText6.Name = "rulesLetterText6";
             this.rulesLetterText6.Size = new System.Drawing.Size(100, 20);
             this.rulesLetterText6.TabIndex = 5;
-            this.rulesLetterText6.TextChanged += new System.EventHandler(this.textBox20_TextChanged);
             // 
             // rulesLetterText5
             // 
@@ -394,57 +429,22 @@
             this.rulesLetterText1.Size = new System.Drawing.Size(100, 20);
             this.rulesLetterText1.TabIndex = 0;
             // 
-            // nameTextBox
-            // 
-            this.nameTextBox.Location = new System.Drawing.Point(85, 13);
-            this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(267, 20);
-            this.nameTextBox.TabIndex = 15;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(10, 16);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(69, 13);
-            this.label13.TabIndex = 16;
-            this.label13.Text = "Nom du profil";
-            // 
-            // createButton
-            // 
-            this.createButton.Location = new System.Drawing.Point(463, 228);
-            this.createButton.Name = "createButton";
-            this.createButton.Size = new System.Drawing.Size(75, 23);
-            this.createButton.TabIndex = 17;
-            this.createButton.Text = "Créer";
-            this.createButton.UseVisualStyleBackColor = true;
-            this.createButton.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // cancelButton
-            // 
-            this.cancelButton.Location = new System.Drawing.Point(8, 228);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 18;
-            this.cancelButton.Text = "Annuler";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
-            // 
-            // Form2
+            // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(550, 256);
+            this.ClientSize = new System.Drawing.Size(548, 249);
             this.Controls.Add(this.cancelButton);
-            this.Controls.Add(this.createButton);
+            this.Controls.Add(this.modifyButton);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.groupBox2);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Form2";
-            this.Text = "Form2";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
-            this.Load += new System.EventHandler(this.Form2_Load);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "Form3";
+            this.Text = "Form3";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form3_FormClosing);
+            this.Load += new System.EventHandler(this.Form3_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
@@ -454,6 +454,10 @@
 
         #endregion
 
+        private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.Button modifyButton;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox rulesIntText12;
         private System.Windows.Forms.Label label1;
@@ -491,9 +495,5 @@
         private System.Windows.Forms.TextBox rulesLetterText3;
         private System.Windows.Forms.TextBox rulesLetterText2;
         private System.Windows.Forms.TextBox rulesLetterText1;
-        private System.Windows.Forms.TextBox nameTextBox;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Button createButton;
-        private System.Windows.Forms.Button cancelButton;
     }
 }

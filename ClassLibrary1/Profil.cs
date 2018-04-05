@@ -17,6 +17,12 @@ namespace ClassLibrary1
             this.RulesList = rulesList;
         }
 
+
+        public override string ToString()
+        {
+            return name;
+        }
+
         public string Name { get => name; set => name = value; }
         public List<Rules> RulesList { get => rulesList; set => rulesList = value; }
     }
