@@ -11,17 +11,28 @@ using System.Windows.Forms;
 
 namespace GUI
 {
-    public partial class Form3 : Form
+    public partial class ModifyProfil : Form
     {
         Profil profil;
-        Form1 parent;
+        Main parent;
         List<Control> rulesList;
-        public Form3(Profil profil, Form1 parent)
+        string originalName;
+        public ModifyProfil(Profil profil, Main parent)
         {
             InitializeComponent();
             this.profil = profil;
             this.parent = parent;
+            originalName = profil.Name; //Le nom de base du profil
             parent.Enabled = false;
+        }
+
+        private bool hasSameName() //Pour empêcher que deux profils ai le même nom
+        {
+            Profil res = parent.listeProfils.Find(x => x.Name == nameTextBox.Text);
+            if (res != null && res.Name != originalName) //Pour éviter qu'on ne puisse pas enregistrer le profil sous son nom originel
+                return true;
+            else
+                return false;
         }
 
         private void Form3_Load(object sender, EventArgs e)
@@ -37,9 +48,17 @@ namespace GUI
         {
             if (nameTextBox.Text.Replace(" ", "") != "") // On vérifie qu'il y'a un nom
             {
-                Profil pr = retrieveData();
-                refreshParent(pr);
-                Close();
+                if(hasSameName() == false)
+                {
+                    Profil pr = retrieveData();
+                    refreshParent(pr);
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show(this, "Ce nom est déjà pris", "Erreur");
+                }
+
             }
             else //si aucun nom on renvoie un message d'erreur
             {
@@ -70,11 +89,13 @@ namespace GUI
         {
             int previous = rulesList.Count - 1; //Il en faut toujours au moins un
             TextBox letter = new TextBox();
-            TextBox chiffre = new TextBox();
+            NumericUpDown chiffre = new NumericUpDown();
             Point letterLoc = letter.Location;
             Point chiffreLoc = letter.Location;
             Point previousLetLoc = rulesList[previous].Location; //On reçoit toujours la lettre
 
+            chiffre.Size = new Size(83, 20);
+            letter.Size = new Size(78, 20);
             letterLoc = previousLetLoc;
             chiffreLoc = previousLetLoc;
             letterLoc.Y += 40;
@@ -84,6 +105,7 @@ namespace GUI
             chiffre.Location = chiffreLoc;
             int previousNumberName = Int32.Parse(rulesList[previous].Name.Substring(15));
             previousNumberName++;
+
             letter.Name = "rulesLetterText" + previousNumberName;
             chiffre.Name = "rulesIntText" + previousNumberName;
 
@@ -130,6 +152,11 @@ namespace GUI
         private void Form3_FormClosing(object sender, FormClosingEventArgs e)
         {
             parent.Enabled = true;
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

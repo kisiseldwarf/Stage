@@ -1,6 +1,6 @@
 ﻿namespace GUI
 {
-    partial class Form1
+    partial class Main
     {
         /// <summary>
         /// Variable nécessaire au concepteur.

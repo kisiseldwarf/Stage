@@ -13,14 +13,15 @@ using ExcelDataReader;
 
 namespace GUI
 {
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
         public List<Etudiant> list; //Liste d'étudiants
         public List<Profil> listeProfils;
-        public Form1()
+        public Main()
         {
             InitializeComponent();
             listeProfils = new List<Profil>();
+            button3.Enabled = false;
             charger();
             refreshSelect(null, null);
             if (listeProfils.Count > 0)
@@ -39,6 +40,7 @@ namespace GUI
                 catch (IOException ex)
                 {
                     MessageBox.Show("Le fichier n'est pas accessible, erreur : " + ex.Message,"Erreur source");
+                    list = null;
                 }
             }
             else
@@ -50,12 +52,13 @@ namespace GUI
                 catch(IOException ex)
                 {
                     MessageBox.Show("Le fichier n'est pas accessible, erreur : " + ex.Message, "Erreur source");
+                    list = null;
                 }
             }
             refreshPreview(null, null);
         }
 
-        public List<Etudiant> ReadCSV(string path) //
+        public List<Etudiant> ReadCSV(string path)
         {
             List<Etudiant> res = new List<Etudiant>();
             try
@@ -156,6 +159,7 @@ namespace GUI
                 MessageBox.Show(this, "Veuillez selectionner une source", "Erreur");
             }
         }
+
         public void exportCSV(List<Etudiant> lne, string path)//
         {
             string[] res = new string[lne.Count()];
@@ -176,29 +180,16 @@ namespace GUI
             }
             File.WriteAllLines(path, res);
         } //Enregistrer dans un fichier .csv
+
         private void button4_Click(object sender, EventArgs e) //Create Profil Button
         {
-            Form2 fr = new Form2(this);
+            CreateProfil fr = new CreateProfil(this);
             fr.Show(this);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void richTextBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button5_Click(object sender, EventArgs e) 
-        {
         }
 
         public void refreshSelect(object sender, EventArgs e) //Affichage de la selection des profils
@@ -210,6 +201,7 @@ namespace GUI
         public void refreshPreview(object sender, EventArgs e)//Affichage des deux previews(profil et fichier)
         {
             profilPreview.Clear(); //Preview du profil
+            setBaseStyle(profilPreview);
             if(selectProfil.SelectedItem != null)
             {
                 Profil selectedProfil = (Profil)selectProfil.SelectedItem;
@@ -235,7 +227,7 @@ namespace GUI
             {
                 //Preview du fichier
                 richTextBox1.Clear();
-                setBaseStyle();
+                setBaseStyle(richTextBox1);
 
                 foreach (var etud in list)
                 {
@@ -321,19 +313,22 @@ namespace GUI
                     }
                     richTextBox1.Text += "\n Ce fichier n'est pas adapté aux regles du profil";
                     button1.Enabled = false; // Si fichier non adapté, alors modifier la preview n'est pas accessible.
+                    button3.Enabled = false; //On ne peux pas l'exporter
                 }
                 else
                 {
                     button1.Enabled = true; //Si aucune erreur sur le fichier, on peut modifier
+                    button3.Enabled = true; //On peut aussi l'exporter
                 }
             }
             else
             {
                 richTextBox1.Clear();
                 button1.Enabled = false; // Si aucun fichier, alors modifier la preview n'est pas accessible.
+                button3.Enabled = false; //Idem
             }
 
-            setPreviewColors();
+            setFilePreviewColors();
         }
 
         private void save()//Pour sauvegarder un profil
@@ -386,7 +381,7 @@ namespace GUI
             }
             catch(Exception) //si on trouve pas le fichier
             {
-                //Rien
+                MessageBox.Show("Aucun fichier de profil n'a été trouvé", "Information"); //On en informe l'utilisateur
             }            
         }
 
@@ -401,15 +396,15 @@ namespace GUI
 
         private void modifyProfilBut_Click(object sender, EventArgs e)
         {
-            Form3 fr = new Form3((Profil)selectProfil.SelectedItem,this);
+            ModifyProfil fr = new ModifyProfil((Profil)selectProfil.SelectedItem,this);
             fr.Show(this);
         }
 
-        private void setBaseStyle()
+        private void setBaseStyle(RichTextBox rb) //Style de base pour les richTextBox du projet
         {
-            richTextBox1.Font = new Font("Arial", 9, FontStyle.Regular);
+            rb.Font = new Font("Arial", 9, FontStyle.Regular);
         }
-        private void setPreviewColors()
+        private void setFilePreviewColors() //Couleurs personnalisées pour la file preview
         {
             if(richTextBox1.Text.Contains("===BEFORE==="))
             {
@@ -431,14 +426,17 @@ namespace GUI
             }
 
         }
-
-        private void setMoyenneColors(int startIndex,int countStop)
+        private void setProfilPreviewColor()//Couleurs perso. pour la profil preview
         {
-            richTextBox1.Select(startIndex, countStop);
-            richTextBox1.SelectionColor = Color.Aquamarine;
+            if(profilPreview.Text.Contains("PROFIL :"))
+            {
+                profilPreview.Select(profilPreview.Text.IndexOf("PROFIL :"), 12);
+                profilPreview.SelectionColor = Color.Red;
+                profilPreview.SelectionFont = new Font("Arial", 10, FontStyle.Bold);
+            }
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e) //Event button modifier la filepreview
         {
             ModificationPreview fr = new ModificationPreview(list,this);
             fr.Show(this);

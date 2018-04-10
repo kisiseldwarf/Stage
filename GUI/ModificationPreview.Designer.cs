@@ -34,15 +34,16 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.NoteTextBox1 = new System.Windows.Forms.TextBox();
             this.EtudiantTextBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.coefficientExam = new System.Windows.Forms.NumericUpDown();
+            this.NoteTextBox1 = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.coefficientExam)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NoteTextBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // selectExamen
@@ -103,14 +104,6 @@
             this.panel1.Size = new System.Drawing.Size(326, 118);
             this.panel1.TabIndex = 0;
             // 
-            // NoteTextBox1
-            // 
-            this.NoteTextBox1.Location = new System.Drawing.Point(177, 14);
-            this.NoteTextBox1.Name = "NoteTextBox1";
-            this.NoteTextBox1.Size = new System.Drawing.Size(100, 20);
-            this.NoteTextBox1.TabIndex = 1;
-            this.NoteTextBox1.TextChanged += new System.EventHandler(this.etudNameChanged);
-            // 
             // EtudiantTextBox1
             // 
             this.EtudiantTextBox1.Location = new System.Drawing.Point(15, 14);
@@ -155,6 +148,15 @@
             this.coefficientExam.TabIndex = 7;
             this.coefficientExam.ValueChanged += new System.EventHandler(this.coefficientExam_ValueChanged);
             // 
+            // NoteTextBox1
+            // 
+            this.NoteTextBox1.Enabled = false;
+            this.NoteTextBox1.Location = new System.Drawing.Point(175, 14);
+            this.NoteTextBox1.Name = "NoteTextBox1";
+            this.NoteTextBox1.Size = new System.Drawing.Size(120, 20);
+            this.NoteTextBox1.TabIndex = 1;
+            this.NoteTextBox1.ValueChanged += new System.EventHandler(this.etudNameChanged);
+            // 
             // ModificationPreview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -176,6 +178,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.coefficientExam)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NoteTextBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -189,11 +192,11 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox NoteTextBox1;
         private System.Windows.Forms.TextBox EtudiantTextBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.NumericUpDown coefficientExam;
+        private System.Windows.Forms.NumericUpDown NoteTextBox1;
     }
 }

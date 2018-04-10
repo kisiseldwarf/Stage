@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace GUI
 {
-    public partial class Form2 : Form
+    public partial class CreateProfil : Form
     {
-        Form1 parent; //On crée une référence sur la form père
-        public Form2(Form1 parent)
+        Main parent; //On crée une référence sur la form père
+        public CreateProfil(Main parent)
         {
             InitializeComponent();
             this.parent = parent;
@@ -27,11 +27,19 @@ namespace GUI
         {
             if(nameTextBox.Text.Replace(" ","") != "") 
             {
-                Profil pr = retrieveData();
+                if(hasSameName() == false)
+                {
+                   Profil pr = retrieveData();
 
-                refreshParent(pr);
+                    refreshParent(pr);
 
-                Close();
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show(this, "Ce nom a déjà été pris", "Erreur");
+                }
+ 
             }
             else //si aucun nom on renvoie un message d'erreur
             {
@@ -80,18 +88,21 @@ namespace GUI
         {
             int previous = rulesList.Count - 1;
             TextBox letter = new TextBox();
-            TextBox chiffre = new TextBox();
+            NumericUpDown chiffre = new NumericUpDown();
             Point letterLoc = letter.Location;
             Point chiffreLoc = letter.Location;
             Point previousLetLoc = rulesList[previous].Location; //On reçoit toujours la lettre
 
+            chiffre.Size = new Size(92, 20);
             letterLoc = previousLetLoc;
             chiffreLoc = previousLetLoc;
             letterLoc.Y += 40;
-            chiffreLoc.X += 130;
+            chiffreLoc.X += 132;
             chiffreLoc.Y += 40;
             letter.Location = letterLoc;
             chiffre.Location = chiffreLoc;
+
+
             letter.Name = "rulesLetterText" + rulesList.Count / 2 + 1;
             chiffre.Name = "rulesChiffreText" + Math.Round((decimal)rulesList.Count / 2);
 
@@ -103,6 +114,13 @@ namespace GUI
 
         }
 
+        private bool hasSameName() //Pour empêcher que deux profils ai le même nom
+        {
+            if (parent.listeProfils.Find(x => x.Name == nameTextBox.Text) != null)
+                return true;
+            else
+                return false;
+        }
         private void Form2_Load(object sender, EventArgs e)
         {
             rulesList = new List<Control>();
