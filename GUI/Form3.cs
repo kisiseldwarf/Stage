@@ -15,6 +15,7 @@ namespace GUI
     {
         Profil profil;
         Form1 parent;
+        List<Control> rulesList;
         public Form3(Profil profil, Form1 parent)
         {
             InitializeComponent();
@@ -25,46 +26,100 @@ namespace GUI
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            nameTextBox.Text = profil.Name;
-            for (int i = 1; i <= 12; i++)
-            {
-                Control[] cLetter = groupBox2.Controls.Find("rulesLetterText" + i, false);
-                Control[] cInt = groupBox2.Controls.Find("rulesIntText" + i, false);      
-                if(i <= profil.RulesList.Count())
-                {
-                    cLetter[0].Text = profil.RulesList[i - 1].Lettre;
-                    cInt[0].Text = profil.RulesList[i - 1].Chiffre.ToString();
-                }
-            }
+            rulesList = new List<Control>();
+            rulesList.Add(rulesIntText1);
+            rulesList.Add(rulesLetterText1); //TOUJOURS mettre la lettre à la fin pour que les regles se placent au bon endroit
+            panel1.AutoScroll = true;
+            loadData();
         }
 
-        private void modifyButton_Click(object sender, EventArgs e)
+        private void modifyButton_Click(object sender, EventArgs e) //Bouton modifier
         {
             if (nameTextBox.Text.Replace(" ", "") != "") // On vérifie qu'il y'a un nom
             {
-                List<Rules> listRules = new List<Rules>();
-                for (int i = 1; i <= 12; i++)
-                {
-                    Control[] cLetter = groupBox2.Controls.Find("rulesLetterText" + i, false);
-                    Control[] cInt = groupBox2.Controls.Find("rulesIntText" + i, false);
-                    if (cLetter[0].Text != "" && cInt[0].Text != "")
-                    {
-                        Rules r = new Rules(Int32.Parse(cInt[0].Text), cLetter[0].Text);
-                        listRules.Add(r);
-                    }
-                }
-                Profil pr = new Profil(nameTextBox.Text, listRules);
-                parent.listeProfils[parent.listeProfils.IndexOf(profil)] = pr;
-                parent.refreshSelect(null, null);
-                parent.selectProfil.SelectedIndex = parent.listeProfils.IndexOf(pr);
-                parent.refreshPreview(null, null);
-                parent.Enabled = true;
-                this.Close();
+                Profil pr = retrieveData();
+                refreshParent(pr);
+                Close();
             }
             else //si aucun nom on renvoie un message d'erreur
             {
-                //TODO
+                MessageBox.Show(this, "Veuillez rentrer un nom pour le profil", "Erreur");
             }
+        }
+
+        private void loadData() //Charge les données du profil et les mets dans des textbox
+        {
+            nameTextBox.Text = profil.Name;
+            int controlID = 0;
+            Control[] res;
+            res = Controls.Find("rulesLetterText1", true);
+            res[0].Text = profil.RulesList[0].Lettre;
+            res = Controls.Find("rulesIntText1", true);
+            res[0].Text = profil.RulesList[0].Chiffre.ToString();
+            for (int i = 1; i < profil.RulesList.Count; i++)
+            {
+                controlID = createRulesControls();
+                res = Controls.Find("rulesLetterText" + controlID, true);
+                res[0].Text = profil.RulesList[i].Lettre;
+                res = Controls.Find("rulesIntText" + controlID, true);
+                res[0].Text = profil.RulesList[i].Chiffre.ToString();
+            }
+        }
+
+        private int createRulesControls() //Crée l'ensemble de controls pour une regle en dessous des derniers controls de regles à avoir été crée
+        {
+            int previous = rulesList.Count - 1; //Il en faut toujours au moins un
+            TextBox letter = new TextBox();
+            TextBox chiffre = new TextBox();
+            Point letterLoc = letter.Location;
+            Point chiffreLoc = letter.Location;
+            Point previousLetLoc = rulesList[previous].Location; //On reçoit toujours la lettre
+
+            letterLoc = previousLetLoc;
+            chiffreLoc = previousLetLoc;
+            letterLoc.Y += 40;
+            chiffreLoc.X += 130;
+            chiffreLoc.Y += 40;
+            letter.Location = letterLoc;
+            chiffre.Location = chiffreLoc;
+            int previousNumberName = Int32.Parse(rulesList[previous].Name.Substring(15));
+            previousNumberName++;
+            letter.Name = "rulesLetterText" + previousNumberName;
+            chiffre.Name = "rulesIntText" + previousNumberName;
+
+            panel1.Controls.Add(letter);
+            panel1.Controls.Add(chiffre);
+
+            rulesList.Add(chiffre);
+            rulesList.Add(letter);
+
+            return previousNumberName;
+        }
+
+        private Profil retrieveData() //Charge les données écrites par l'utilisateur en mémoire
+        {
+            List<Rules> listRules = new List<Rules>();
+
+            for (int i = 0; i < rulesList.Count / 2; i++) //Algo de parcours de tableau de deux à deux
+            {
+                if (rulesList[i * 2].Text != "" && rulesList[i * 2 + 1].Text != "") // Pour pas avoir des regles vides
+                {
+                    Rules r = new Rules(Int32.Parse(rulesList[i * 2].Text), rulesList[i * 2 + 1].Text);
+                    listRules.Add(r);
+                }
+            }
+
+            Profil pr = new Profil(nameTextBox.Text, listRules);
+            return pr;
+        }
+
+        private void refreshParent(Profil pr)
+        {
+            parent.listeProfils[parent.listeProfils.IndexOf(profil)] = pr;
+            parent.refreshSelect(null, null);
+            parent.selectProfil.SelectedIndex = parent.listeProfils.IndexOf(pr);
+            parent.refreshPreview(null, null);
+            parent.Enabled = true;
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

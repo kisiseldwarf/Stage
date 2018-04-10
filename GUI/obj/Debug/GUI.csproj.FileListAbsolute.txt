@@ -14,3 +14,4 @@ C:\Users\hadikk\Source\Repos\ClassLibrary1\GUI\bin\Debug\ExcelDataReader.dll
 C:\Users\hadikk\Source\Repos\ClassLibrary1\GUI\bin\Debug\ExcelDataReader.xml
 C:\Users\hadikk\Source\Repos\ClassLibrary1\GUI\obj\Debug\GUI.Form2.resources
 C:\Users\hadikk\Source\Repos\ClassLibrary1\GUI\obj\Debug\GUI.Form3.resources
+C:\Users\hadikk\Source\Repos\ClassLibrary1\GUI\obj\Debug\GUI.ModificationPreview.resources

@@ -38,9 +38,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.selectProfil = new System.Windows.Forms.ComboBox();
             this.profilPreview = new System.Windows.Forms.RichTextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.removeProfilBut = new System.Windows.Forms.Button();
             this.modifyProfilBut = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -66,14 +66,14 @@
             this.richTextBox1.Location = new System.Drawing.Point(294, 24);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(231, 198);
+            this.richTextBox1.Size = new System.Drawing.Size(327, 198);
             this.richTextBox1.TabIndex = 3;
             this.richTextBox1.Text = "";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(480, 9);
+            this.label2.Location = new System.Drawing.Point(576, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(45, 13);
             this.label2.TabIndex = 4;
@@ -92,7 +92,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(411, 228);
+            this.button3.Location = new System.Drawing.Point(507, 228);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(114, 23);
             this.button3.TabIndex = 6;
@@ -113,7 +113,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 50);
+            this.label3.Location = new System.Drawing.Point(12, 53);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(30, 13);
             this.label3.TabIndex = 8;
@@ -139,18 +139,9 @@
             this.profilPreview.TabIndex = 10;
             this.profilPreview.Text = "";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 228);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(85, 13);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "Preview du profil";
-            // 
             // removeProfilBut
             // 
-            this.removeProfilBut.Location = new System.Drawing.Point(117, 228);
+            this.removeProfilBut.Location = new System.Drawing.Point(15, 228);
             this.removeProfilBut.Name = "removeProfilBut";
             this.removeProfilBut.Size = new System.Drawing.Size(75, 23);
             this.removeProfilBut.TabIndex = 12;
@@ -160,7 +151,7 @@
             // 
             // modifyProfilBut
             // 
-            this.modifyProfilBut.Location = new System.Drawing.Point(210, 228);
+            this.modifyProfilBut.Location = new System.Drawing.Point(96, 228);
             this.modifyProfilBut.Name = "modifyProfilBut";
             this.modifyProfilBut.Size = new System.Drawing.Size(75, 23);
             this.modifyProfilBut.TabIndex = 13;
@@ -168,14 +159,24 @@
             this.modifyProfilBut.UseVisualStyleBackColor = true;
             this.modifyProfilBut.Click += new System.EventHandler(this.modifyProfilBut_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(426, 228);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Modifier";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(550, 260);
+            this.ClientSize = new System.Drawing.Size(633, 260);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.modifyProfilBut);
             this.Controls.Add(this.removeProfilBut);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.profilPreview);
             this.Controls.Add(this.selectProfil);
             this.Controls.Add(this.label3);
@@ -209,10 +210,10 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.RichTextBox profilPreview;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button removeProfilBut;
         private System.Windows.Forms.Button modifyProfilBut;
         public System.Windows.Forms.ComboBox selectProfil;
+        private System.Windows.Forms.Button button1;
     }
 }
 

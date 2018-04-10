@@ -21,52 +21,24 @@ namespace GUI
             parent.Enabled = false;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form2_Load(object sender, EventArgs e)
-        {
-
-        }
+        List<Control> rulesList;
 
         private void button1_Click(object sender, EventArgs e) //function Create Profil
         {
-            if(nameTextBox.Text.Replace(" ","") != "") // On vérifie qu'il y'a un nom
+            if(nameTextBox.Text.Replace(" ","") != "") 
             {
-                List<Rules> listRules = new List<Rules>();
-                for (int i = 1; i <= 12; i++)
-                {
-                    Control[] cLetter = groupBox2.Controls.Find("rulesLetterText" + i, false);
-                    Control[] cInt = groupBox2.Controls.Find("rulesIntText" + i, false);
-                    if (cLetter[0].Text != "" && cInt[0].Text != "")
-                    {
-                        Rules r = new Rules(Int32.Parse(cInt[0].Text), cLetter[0].Text);
-                        listRules.Add(r);
-                    }
-                }
-                Profil pr = new Profil(nameTextBox.Text, listRules);
-                parent.listeProfils.Add(pr);
-                parent.refreshSelect(null, null);
-                parent.selectProfil.SelectedIndex = parent.listeProfils.IndexOf(pr);
-                parent.refreshPreview(null, null);
-                parent.Enabled = true;
-                this.Close();
+                Profil pr = retrieveData();
+
+                refreshParent(pr);
+
+                Close();
             }
             else //si aucun nom on renvoie un message d'erreur
             {
                 MessageBox.Show(this,"Veuillez rentrer un nom pour le profil","Erreur");
             }
-                
-
         }
 
-
-        private void textBox20_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void cancelButton_Click(object sender, EventArgs e) //Button Cancel
         {
@@ -76,6 +48,67 @@ namespace GUI
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
             parent.Enabled = true;
+        }
+
+        private void refreshParent(Profil pr)
+        {
+            parent.listeProfils.Add(pr);
+            parent.refreshSelect(null, null);
+            parent.selectProfil.SelectedIndex = parent.listeProfils.IndexOf(pr);
+            parent.refreshPreview(null, null);
+            parent.Enabled = true;
+        }
+
+        private Profil retrieveData()
+        {
+            List<Rules> listRules = new List<Rules>();
+
+            for (int i = 0; i < rulesList.Count / 2; i++) //Algo de parcours de tableau de deux à deux
+            {
+                if (rulesList[i * 2].Text != "" && rulesList[i * 2 + 1].Text != "") // Pour pas avoir des regles vides
+                {
+                    Rules r = new Rules(Int32.Parse(rulesList[i * 2].Text), rulesList[i * 2 + 1].Text);
+                    listRules.Add(r);
+                }
+            }
+
+            Profil pr = new Profil(nameTextBox.Text, listRules);
+            return pr;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e) //Ajouter une regle
+        {
+            int previous = rulesList.Count - 1;
+            TextBox letter = new TextBox();
+            TextBox chiffre = new TextBox();
+            Point letterLoc = letter.Location;
+            Point chiffreLoc = letter.Location;
+            Point previousLetLoc = rulesList[previous].Location; //On reçoit toujours la lettre
+
+            letterLoc = previousLetLoc;
+            chiffreLoc = previousLetLoc;
+            letterLoc.Y += 40;
+            chiffreLoc.X += 130;
+            chiffreLoc.Y += 40;
+            letter.Location = letterLoc;
+            chiffre.Location = chiffreLoc;
+            letter.Name = "rulesLetterText" + rulesList.Count / 2 + 1;
+            chiffre.Name = "rulesChiffreText" + Math.Round((decimal)rulesList.Count / 2);
+
+            panel1.Controls.Add(letter);
+            panel1.Controls.Add(chiffre);
+
+            rulesList.Add(chiffre);
+            rulesList.Add(letter);
+
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+            rulesList = new List<Control>();
+            rulesList.Add(rulesIntText1);
+            rulesList.Add(rulesLetterText1); //TOUJOURS mettre la lettre à la fin pour que les regles se placent au bon endroit
+            panel1.AutoScroll = true;
         }
     }
 }
