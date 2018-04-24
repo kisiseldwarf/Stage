@@ -30,6 +30,7 @@ namespace GUI
         }
 
         private void button1_Click(object sender, EventArgs e) //Source changed
+
         {
             if (textBox1.Text.EndsWith("csv"))
             {
@@ -58,6 +59,11 @@ namespace GUI
             refreshPreview(null, null);
         }
 
+        /// <summary>
+        /// Lit un fichier CSV dans path et retournes les données dans le fichier sous forme d'une liste d'étudiants
+        /// </summary>
+        /// <param name="path">chemin du fichier à lire</param>
+        /// <returns>Une liste d'étudiants</returns>
         public List<Etudiant> ReadCSV(string path)
         {
             List<Etudiant> res = new List<Etudiant>();
@@ -77,12 +83,9 @@ namespace GUI
                             ne.NomEtudiant = item; //La première donnée est toujours le nom de l'étudiant
                         else
                         {
-                            //NEW
                             ex.Lettre = item;
                             ex.Id = index;
                             ne.ListExam.Add(ex);
-                            //OLD
-                            //ne.ListeNotesLettre.Add(item);
                         }
                         index++; //Représente la colonne sur laquelle on se situe
                     }
@@ -97,23 +100,28 @@ namespace GUI
             }
         } //Lire CSV
 
+        /// <summary>
+        /// Lit un fichier excel dans path et retournes les données dans le fichier sous forme d'une liste d'étudiants
+        /// </summary>
+        /// <param name="path">chemin du fichier à lire</param>
+        /// <returns>une liste d'étudiants</returns>
         public List<Etudiant> ReadExcel(string path)
         {
             try
             {
-                var stream = File.Open(path, FileMode.Open, FileAccess.Read);
+                var stream = File.Open(path, FileMode.Open, FileAccess.Read); //On ouvre le fichier pour le lire
                 var excelReader = ExcelReaderFactory.CreateReader(stream);
-                List<Etudiant> res = new List<Etudiant>();
-                while (excelReader.Read())
+
+                List<Etudiant> res = new List<Etudiant>(); //Mémoire tampon qu'on renverra à la fin de la fonction
+                while (excelReader.Read()) //Tant qu'on peux lire
                 {
-                    Etudiant ne = new Etudiant();
+                    Etudiant ne = new Etudiant(); //Mémoire tampon d'un étudiant qu'on ajoutera à res à la fin du for
                     for (int i = 0; i < excelReader.FieldCount; i++)
                     {
                         if (i == 0)
-                            ne.NomEtudiant = excelReader.GetString(i);
+                            ne.NomEtudiant = excelReader.GetString(i); //La première colonne est toujours le nom
                         else
                         {
-                            //NEW
                             Examen ex = new Examen();
                             ex.Lettre = excelReader.GetString(i);
                             ex.Id = i;
@@ -162,20 +170,15 @@ namespace GUI
 
         public void exportCSV(List<Etudiant> lne, string path)//
         {
+            //On enregistre à partir de la mémoire tampon
             string[] res = new string[lne.Count()];
             for (int i = 0; i < lne.Count(); i++) //On parcours tous les étudiants
             {
                 res[i] += lne[i].NomEtudiant + ";"; //Le nom en premier (toujours)
-                //NEW
                 foreach (var exam in lne[i].ListExam)
                 {
                     res[i] += exam.Chiffre + ";";
                 }
-                //OLD
-                /*foreach (var item in lne[i].ListeNotesChiffre)
-                {
-                    res[i] += item + ";";
-                }*/
                 res[i] += lne[i].Moyenne;
             }
             File.WriteAllLines(path, res);
@@ -256,16 +259,10 @@ namespace GUI
                     {
                         if (i != etud.ListExam.Count - 1)
                         {
-                            //OLD
-                            //richTextBox1.Text += etud.ListeNotesLettre[i] + ", ";
-                            //NEW
                             richTextBox1.Text += etud.ListExam[i].Lettre + ", ";
                         }
                         else
                         {
-                            //OLD
-                            //richTextBox1.Text += etud.ListeNotesLettre[i];
-                            //NEW
                             richTextBox1.Text += etud.ListExam[i].Lettre;
                         }
                     }
@@ -440,6 +437,17 @@ namespace GUI
         {
             ModificationPreview fr = new ModificationPreview(list,this);
             fr.Show(this);
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void aProposToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //aboutMenu ab = new aboutMenu(this);
+            //ab.Show(this);
         }
     }
 

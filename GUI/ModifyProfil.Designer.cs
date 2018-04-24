@@ -39,6 +39,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.rulesIntText1 = new System.Windows.Forms.NumericUpDown();
             this.rulesLetterText1 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rulesIntText1)).BeginInit();
@@ -144,11 +145,22 @@
             this.rulesLetterText1.Size = new System.Drawing.Size(78, 20);
             this.rulesLetterText1.TabIndex = 0;
             // 
-            // Form3
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(235, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(64, 23);
+            this.button1.TabIndex = 25;
+            this.button1.Text = "Ajouter";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // ModifyProfil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(310, 249);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.modifyButton);
@@ -157,7 +169,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form3";
+            this.Name = "ModifyProfil";
             this.Text = "Form3";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form3_FormClosing);
             this.Load += new System.EventHandler(this.Form3_Load);
@@ -184,5 +196,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox rulesLetterText1;
         private System.Windows.Forms.NumericUpDown rulesIntText1;
+        private System.Windows.Forms.Button button1;
     }
 }

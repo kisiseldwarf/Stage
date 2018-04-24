@@ -2,8 +2,10 @@
 {
     public class Rules
     {
-        int chiffre;
+        float chiffre;
         string lettre;
+        float borneMax;
+        float borneMin;
 
         public Rules(int chiffre, string lettre)
         {
@@ -11,7 +13,7 @@
             this.Lettre = lettre;
         }
 
-        public int Chiffre { get => chiffre; set => chiffre = value; }
+        public float Chiffre { get => chiffre; set => chiffre = value; }
         public string Lettre { get => lettre; set => lettre = value; }
     }
 }

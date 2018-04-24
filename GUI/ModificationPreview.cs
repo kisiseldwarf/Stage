@@ -58,7 +58,7 @@ namespace GUI
         private void printData()//Affichage des données tampons
         {
             Examen ex = (Examen) selectExamen.SelectedItem;
-            coefficientExam.Value = ex.Coef1;
+            coefficientExam.Value = ex.Coef;
 
             int controlID = 0;
             Control[] res;
@@ -167,7 +167,7 @@ namespace GUI
                     foreach (var examen in examens) //Liste des examens tampon
                     {
                         if (examen.Id == examEtud.Id)
-                            examEtud.Coef1 = examen.Coef1;
+                            examEtud.Coef = examen.Coef;
                     }
                 }
             }
@@ -177,8 +177,13 @@ namespace GUI
 
         private void coefficientExam_ValueChanged(object sender, EventArgs e)//Event quand on change le coefficient d'un examen
         {
-            examens.Find(x => x == selectExamen.SelectedItem).Coef1 = (int)coefficientExam.Value;
+            examens.Find(x => x == selectExamen.SelectedItem).Coef = (int)coefficientExam.Value;
             //On change le coefficient de l'exam selectionné
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

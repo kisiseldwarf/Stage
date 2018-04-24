@@ -15,3 +15,4 @@ C:\Users\hadikk\Source\Repos\ClassLibrary1\GUI\obj\Debug\GUI.ModificationPreview
 C:\Users\hadikk\Source\Repos\ClassLibrary1\GUI\obj\Debug\GUI.Main.resources
 C:\Users\hadikk\Source\Repos\ClassLibrary1\GUI\obj\Debug\GUI.CreateProfil.resources
 C:\Users\hadikk\Source\Repos\ClassLibrary1\GUI\obj\Debug\GUI.ModifyProfil.resources
+C:\Users\hadikk\Source\Repos\ClassLibrary1\GUI\obj\Debug\GUI.aboutMenu.resources

@@ -23,12 +23,12 @@ namespace ClassLibrary1
         public float Moyenne {
             get
             {
-                int buffer = 0;
+                float buffer = 0;
                 int nbItemBuffer=0;
                 foreach (var exam in listExam)
                 {
-                    buffer += exam.Chiffre*exam.Coef1;
-                    nbItemBuffer += exam.Coef1;
+                    buffer += exam.Chiffre*exam.Coef;
+                    nbItemBuffer += exam.Coef;
                 }
                 return buffer / nbItemBuffer;
             }
