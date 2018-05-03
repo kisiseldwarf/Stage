@@ -11,7 +11,7 @@ namespace ClassLibrary1
         string lettre; //La lettre de l'examen
         float chiffre; //La note chiffrée de l'examen
 
-        int coef = 1; //Le coef de l'examen
+        int coef = 1; //Le coef de l'examen, à 1 au départ
         int id; //L'id est unique à un examen. Il permet de faire correspondre deux examens identique chez plusieurs étudiants.
 
         public override string ToString()

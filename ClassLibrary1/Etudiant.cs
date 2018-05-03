@@ -40,7 +40,6 @@ namespace ClassLibrary1
         {
             if (profil == null)
                 throw new Exception("Profil est null");
-            //NEW
             foreach (var exam in ListExam)
             {
                 bool notFound = true;
@@ -57,23 +56,6 @@ namespace ClassLibrary1
                     throw new Exception();
                 }
             }
-            //OLD
-            /*foreach (var letter in ListeNotesLettre)
-            {
-                bool notFound = true;
-                foreach (var rule in profil.RulesList)
-                {
-                    if (rule.Lettre == letter)
-                    {
-                        ListeNotesChiffre.Add(rule.Chiffre);
-                        notFound = false;
-                    }
-                }
-                if (notFound == true)
-                {
-                    // TO DO : Mettre une exception ici
-                }
-            }*/
         } //Lettre -> Notes
     }
 }
