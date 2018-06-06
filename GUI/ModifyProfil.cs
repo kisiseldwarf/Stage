@@ -15,7 +15,7 @@ namespace GUI
     {
         Profil profil;
         Main parent;
-        List<Control> rulesList;
+        List<Rules> rulesList;
         string originalName;
         public ModifyProfil(Profil profil, Main parent)
         {
@@ -37,9 +37,7 @@ namespace GUI
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            rulesList = new List<Control>();
-            rulesList.Add(rulesIntText1);
-            rulesList.Add(rulesLetterText1); //TOUJOURS mettre la lettre à la fin pour que les regles se placent au bon endroit
+            rulesList = new List<Rules>();
             panel1.AutoScroll = true;
             loadData();
         }
@@ -50,8 +48,8 @@ namespace GUI
             {
                 if(hasSameName() == false)
                 {
-                    Profil pr = retrieveData();
-                    refreshParent(pr);
+                    saveData();
+                    refreshParent(profil);
                     Close();
                 }
                 else
@@ -71,73 +69,70 @@ namespace GUI
             nameTextBox.Text = profil.Name;
             int controlID = 0;
             Control[] res;
-            res = Controls.Find("rulesLetterText1", true);
+            res = Controls.Find("rule1Letter", true);
             res[0].Text = profil.RulesList[0].Lettre;
-            res = Controls.Find("rulesIntText1", true);
-            res[0].Text = profil.RulesList[0].Chiffre.ToString();
+            res = Controls.Find("rule1Int1", true);
+            res[0].Text = profil.RulesList[0].BorneH.ToString();
             for (int i = 1; i < profil.RulesList.Count; i++)
             {
                 controlID = createRulesControls();
-                res = Controls.Find("rulesLetterText" + controlID, true);
+                res = Controls.Find("rule"+ controlID + "Letter", true);
                 res[0].Text = profil.RulesList[i].Lettre;
-                res = Controls.Find("rulesIntText" + controlID, true);
-                res[0].Text = profil.RulesList[i].Chiffre.ToString();
+                res = Controls.Find("rule"+ controlID + "Int1Text", true);
+                res[0].Text = profil.RulesList[i].BorneH.ToString();
             }
         }
 
         private int createRulesControls() //Crée l'ensemble de controls pour une regle en dessous des derniers controls de regles à avoir été crée
         {
-            int previous = rulesList.Count - 1; //Il en faut toujours au moins un
+            int previous = rulesList.Count - 1;
             TextBox letter = new TextBox();
-            NumericUpDown chiffre = new NumericUpDown();
+            NumericUpDown borneH = new NumericUpDown();
+            NumericUpDown borneB = new NumericUpDown();
             Point letterLoc = letter.Location;
-            Point chiffreLoc = letter.Location;
-            Point previousLetLoc = rulesList[previous].Location; //On reçoit toujours la lettre
+            Point borneHLoc = letter.Location;
+            Point borneBLoc = letter.Location;
+            Control[] previousLetter = Controls.Find("rule" + rulesList.Count + "Letter", true);
+            Point previousLetLoc = previousLetter[0].Location;
 
-            chiffre.Size = new Size(83, 20);
-            letter.Size = new Size(78, 20);
+            borneH.Size = new Size(92, 20);
+            borneH.Size = new Size(92, 20);
             letterLoc = previousLetLoc;
-            chiffreLoc = previousLetLoc;
+            borneHLoc = previousLetLoc;
+            borneBLoc = previousLetLoc;
             letterLoc.Y += 40;
-            chiffreLoc.X += 130;
-            chiffreLoc.Y += 40;
+            borneHLoc.X += 150;
+            borneHLoc.Y += 40;
+            borneBLoc.X += 300;
+            borneBLoc.Y += 40;
             letter.Location = letterLoc;
-            chiffre.Location = chiffreLoc;
-            int previousNumberName = Int32.Parse(rulesList[previous].Name.Substring(15));
-            previousNumberName++;
+            borneH.Location = borneHLoc;
+            borneB.Location = borneBLoc;
+            borneH.ValueChanged += new EventHandler(numericUpDown1_ValueChanged);
+            borneB.ValueChanged += new EventHandler(numericUpDown1_ValueChanged);
 
-            letter.Name = "rulesLetterText" + previousNumberName;
-            chiffre.Name = "rulesIntText" + previousNumberName;
+
+            letter.Name = "rule" + (rulesList.Count + 1) + "Letter";
+            borneH.Name = "rule" + (rulesList.Count + 1) + "Int1";
+            borneB.Name = "rule" + (rulesList.Count + 1) + "Int2";
+
+            Rules rule = new Rules((float)borneH.Value, (float)borneB.Value, letter.Text);
+            rulesList.Add(rule);
 
             panel1.Controls.Add(letter);
-            panel1.Controls.Add(chiffre);
+            panel1.Controls.Add(borneH);
+            panel1.Controls.Add(borneB);
 
-            rulesList.Add(chiffre);
-            rulesList.Add(letter);
-
-            return previousNumberName;
+            return rulesList.Count;
         }
 
-        private Profil retrieveData() //Charge les données écrites par l'utilisateur en mémoire
+        private void saveData() //Charge les données écrites par l'utilisateur en mémoire
         {
-            List<Rules> listRules = new List<Rules>();
-
-            for (int i = 0; i < rulesList.Count / 2; i++) //Algo de parcours de tableau de deux à deux
-            {
-                if (rulesList[i * 2].Text != "" && rulesList[i * 2 + 1].Text != "") // Pour pas avoir des regles vides
-                {
-                    Rules r = new Rules(Int32.Parse(rulesList[i * 2].Text), rulesList[i * 2 + 1].Text);
-                    listRules.Add(r);
-                }
-            }
-
-            Profil pr = new Profil(nameTextBox.Text, listRules);
-            return pr;
+            profil.changeProfil(rulesList);
         }
 
         private void refreshParent(Profil pr)
         {
-            parent.listeProfils[parent.listeProfils.IndexOf(profil)] = pr;
             parent.refreshSelect(null, null);
             parent.selectProfil.SelectedIndex = parent.listeProfils.IndexOf(pr);
             parent.refreshPreview(null, null);
@@ -156,7 +151,18 @@ namespace GUI
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
-
+            int id;
+            NumericUpDown np;
+            np = (NumericUpDown)sender;
+            id = Int32.Parse(np.Name.Substring(4, 9 - np.Name.Count()));
+            if (np.Name.Substring(8) == "1")
+            {
+                rulesList[id].BorneH = (float)np.Value;
+            }
+            else
+            {
+                rulesList[id].BorneB = (float)np.Value;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

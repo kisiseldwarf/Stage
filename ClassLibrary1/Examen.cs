@@ -9,7 +9,8 @@ namespace ClassLibrary1
     public class Examen
     {
         string lettre; //La lettre de l'examen
-        float chiffre; //La note chiffrée de l'examen
+        float noteBorneH; //La note chiffrée de l'examen
+        float noteBorneB; //La note chiffrée de l'examen
 
         int coef = 1; //Le coef de l'examen, à 1 au départ
         int id; //L'id est unique à un examen. Il permet de faire correspondre deux examens identique chez plusieurs étudiants.
@@ -25,7 +26,8 @@ namespace ClassLibrary1
         /// <param name="exam">L'objet Examen à recopier</param>
         public Examen(Examen exam)
         {
-            chiffre = exam.chiffre;
+            NoteBorneH = exam.NoteBorneH;
+            NoteBorneB = exam.NoteBorneB;
             lettre = exam.lettre;
             coef = exam.Coef;
             id = exam.id;
@@ -34,16 +36,46 @@ namespace ClassLibrary1
         /// <summary>
         /// Constructeur par défaut
         /// </summary>
+        public Examen(string letter, Profil profile)
+        {
+            lettre = letter;
+            setNumber(profile);
+            id = 0;
+        }
         public Examen()
         {
             lettre = "";
-            chiffre = 0;
             id = 0;
+            NoteBorneB = 0;
+            NoteBorneH = 0;
+        }
+
+        public void setNumber(Profil profile)
+        {
+            bool notFound = true;
+            if(profile == null)
+            {
+                throw new Exception("profile can't be null. Please put a profile.");
+            }
+            foreach (var rule in profile.RulesList)
+            {
+                if(rule.Lettre == lettre)
+                {
+                    NoteBorneB = rule.BorneB; 
+                    NoteBorneH = rule.BorneH;
+                }
+                notFound = false;
+            }
+            if(notFound == true)
+            {
+                throw new Exception("profile doesn't match with this letter.");
+            }
         }
 
         public string Lettre { get => lettre; set => lettre = value; }
-        public float Chiffre { get => chiffre; set => chiffre = value; }
         public int Coef { get => coef; set => coef = value; }
         public int Id { get => id; set => id = value; }
+        public float NoteBorneH { get => noteBorneH; set => noteBorneH = value; }
+        public float NoteBorneB { get => noteBorneB; set => noteBorneB = value; }
     }
 }

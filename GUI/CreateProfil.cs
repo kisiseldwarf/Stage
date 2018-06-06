@@ -21,7 +21,7 @@ namespace GUI
             parent.Enabled = false;
         }
 
-        List<Control> rulesList;
+        List<Rules> rulesList;
 
         private void button1_Click(object sender, EventArgs e) //function Create Profil
         {
@@ -29,7 +29,7 @@ namespace GUI
             {
                 if(hasSameName() == false)
                 {
-                   Profil pr = retrieveData();
+                    Profil pr = retrieveData();
 
                     refreshParent(pr);
 
@@ -69,49 +69,46 @@ namespace GUI
 
         private Profil retrieveData()
         {
-            List<Rules> listRules = new List<Rules>();
-
-            for (int i = 0; i < rulesList.Count / 2; i++) //Algo de parcours de tableau de deux à deux
-            {
-                if (rulesList[i * 2].Text != "" && rulesList[i * 2 + 1].Text != "") // Pour pas avoir des regles vides
-                {
-                    Rules r = new Rules(Int32.Parse(rulesList[i * 2].Text), rulesList[i * 2 + 1].Text);
-                    listRules.Add(r);
-                }
-            }
-
-            Profil pr = new Profil(nameTextBox.Text, listRules);
-            return pr;
+            return new Profil(nameTextBox.Text,rulesList);
         }
 
         private void button1_Click_1(object sender, EventArgs e) //Ajouter une regle
         {
             int previous = rulesList.Count - 1;
             TextBox letter = new TextBox();
-            NumericUpDown chiffre = new NumericUpDown();
+            NumericUpDown borneH = new NumericUpDown();
+            NumericUpDown borneB = new NumericUpDown();
             Point letterLoc = letter.Location;
-            Point chiffreLoc = letter.Location;
-            Point previousLetLoc = rulesList[previous].Location; //On reçoit toujours la lettre
+            Point borneHLoc = letter.Location;
+            Point borneBLoc = letter.Location;
+            Control[] previousLetter = Controls.Find("rule" + rulesList.Count + "Letter", true);
+            Point previousLetLoc = previousLetter[0].Location;
 
-            chiffre.Size = new Size(92, 20);
+            borneH.Size = new Size(92, 20);
+            borneB.Size = new Size(92, 20);
             letterLoc = previousLetLoc;
-            chiffreLoc = previousLetLoc;
+            borneHLoc = previousLetLoc;
+            borneBLoc = previousLetLoc;
             letterLoc.Y += 40;
-            chiffreLoc.X += 132;
-            chiffreLoc.Y += 40;
+            borneHLoc.X += 150;
+            borneHLoc.Y += 40;
+            borneBLoc.X += 275;
+            borneBLoc.Y += 40;
             letter.Location = letterLoc;
-            chiffre.Location = chiffreLoc;
+            borneH.Location = borneHLoc;
+            borneB.Location = borneBLoc;
 
 
-            letter.Name = "rulesLetterText" + rulesList.Count / 2 + 1;
-            chiffre.Name = "rulesChiffreText" + Math.Round((decimal)rulesList.Count / 2);
+            letter.Name = "rule" + (rulesList.Count + 1) + "Letter";
+            borneH.Name = "rule" + (rulesList.Count + 1) + "Int1";
+            borneB.Name = "rule" + (rulesList.Count + 1) + "Int2";
+
+            Rules rule = new Rules((float)borneH.Value, (float)borneB.Value, letter.Text);
+            rulesList.Add(rule);
 
             panel1.Controls.Add(letter);
-            panel1.Controls.Add(chiffre);
-
-            rulesList.Add(chiffre);
-            rulesList.Add(letter);
-
+            panel1.Controls.Add(borneH);
+            panel1.Controls.Add(borneB);
         }
 
         private bool hasSameName() //Pour empêcher que deux profils ai le même nom
@@ -123,10 +120,26 @@ namespace GUI
         }
         private void Form2_Load(object sender, EventArgs e)
         {
-            rulesList = new List<Control>();
-            rulesList.Add(rulesIntText1);
-            rulesList.Add(rulesLetterText1); //TOUJOURS mettre la lettre à la fin pour que les regles se placent au bon endroit
+            rulesList = new List<Rules>();
+            Rules rule = new Rules((float)rule1Int1.Value, (float)rule1Int2.Value, rule1Letter.Text);
+            rulesList.Add(rule);
             panel1.AutoScroll = true;
+        }
+
+        private void rules1Int1_ValueChanged(object sender, EventArgs e)
+        {
+            int id;
+            NumericUpDown np;
+            np = (NumericUpDown)sender;
+            id = Int32.Parse(np.Name.Substring(4, 10 - np.Name.Count()));
+            if(np.Name.Substring(8) == "1")
+            {
+                rulesList[id-1].BorneH = (float)np.Value;
+            }
+            else
+            {
+                rulesList[id-1].BorneB = (float)np.Value;
+            }
         }
     }
 }

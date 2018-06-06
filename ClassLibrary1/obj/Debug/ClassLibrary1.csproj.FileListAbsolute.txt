@@ -9,3 +9,14 @@ C:\Users\hadikk\Source\Repos\ClassLibrary1\ClassLibrary1\obj\Debug\ClassLibrary1
 C:\Users\hadikk\Source\Repos\ClassLibrary1\ClassLibrary1\obj\Debug\ClassLibrary1.csproj.ResolveComReference.cache
 C:\Users\hadikk\Source\Repos\ClassLibrary1\ClassLibrary1\bin\Debug\ExcelDataReader.dll
 C:\Users\hadikk\Source\Repos\ClassLibrary1\ClassLibrary1\bin\Debug\ExcelDataReader.xml
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\ClassLibrary1\bin\Debug\ClassLibrary1.dll
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\ClassLibrary1\bin\Debug\ClassLibrary1.pdb
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\ClassLibrary1\bin\Debug\CsvHelper.dll
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\ClassLibrary1\bin\Debug\ExcelDataReader.dll
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\ClassLibrary1\bin\Debug\CsvHelper.xml
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\ClassLibrary1\bin\Debug\ExcelDataReader.xml
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\ClassLibrary1\obj\Debug\ClassLibrary1.csprojResolveAssemblyReference.cache
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\ClassLibrary1\obj\Debug\ClassLibrary1.csproj.ResolveComReference.cache
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\ClassLibrary1\obj\Debug\ClassLibrary1.csproj.CoreCompileInputs.cache
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\ClassLibrary1\obj\Debug\ClassLibrary1.dll
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\ClassLibrary1\obj\Debug\ClassLibrary1.pdb

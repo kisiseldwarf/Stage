@@ -175,11 +175,8 @@ namespace GUI
             for (int i = 0; i < lne.Count(); i++) //On parcours tous les étudiants
             {
                 res[i] += lne[i].NomEtudiant + ";"; //Le nom en premier (toujours)
-                foreach (var exam in lne[i].ListExam)
-                {
-                    res[i] += exam.Chiffre + ";";
-                }
-                res[i] += lne[i].Moyenne;
+                res[i] += lne[i].moyenneBorneB() + ";";
+                res[i] += lne[i].moyenneBorneH() + ";";
             }
             File.WriteAllLines(path, res);
         } //Enregistrer dans un fichier .csv
@@ -212,7 +209,7 @@ namespace GUI
                 res += "Regles : " + selectedProfil.RulesList.Count() + "\n";
                 foreach (var item in selectedProfil.RulesList)
                 {
-                    res += item.Lettre + " => " + item.Chiffre + "\n";
+                    res += item.Lettre + " => " + item.BorneB + " " + item.BorneH + "\n";
                 }
                 profilPreview.Text = res;
                 modifyProfilBut.Enabled = true;
@@ -275,14 +272,10 @@ namespace GUI
                 foreach (var etud in list)
                 {
                     richTextBox1.Text += etud.NomEtudiant + " => ";
-                    for (int i = 0; i < etud.ListExam.Count; i++)
-                    {
-                        richTextBox1.Text += etud.ListExam[i].Chiffre + " , ";
-                    }
                     try
                     {
                         startIndex = richTextBox1.Text.Length;
-                        moyenne = "Moyenne : " + etud.Moyenne + "\n";
+                        moyenne = "Moyenne : " + etud.moyenneBorneB() + " - " + etud.moyenneBorneH() + "\n";
                         richTextBox1.Text += moyenne;
                     }
                     catch(Exception ex)
@@ -339,8 +332,8 @@ namespace GUI
                 {
                     buffer += rule.Lettre;
                     buffer += ":";
-                    buffer += rule.Chiffre;
-                    buffer += ";";
+                    buffer += rule.BorneH;
+                    buffer += ":";
                 }
                 buffer += "\n";
             }
@@ -368,7 +361,7 @@ namespace GUI
                         for (int i = 1; i < values.Length - 1; i++)
                         {
                             string[] rules = values[i].Split(':');
-                            Rules bufferRules = new Rules(Int32.Parse(rules[1]), rules[0]);
+                            Rules bufferRules = new Rules(Int32.Parse(rules[1]),Int32.Parse(rules[2]),rules[0]);
                             buffer.RulesList.Add(bufferRules);
                         }
                         listeProfils.Add(buffer);

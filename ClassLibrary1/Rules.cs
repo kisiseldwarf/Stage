@@ -2,18 +2,19 @@
 {
     public class Rules
     {
-        float chiffre;
+        float borneH;
+        float borneB;
         string lettre;
-        float borneMax;
-        float borneMin;
 
-        public Rules(int chiffre, string lettre)
+        public Rules(float borneH,float borneB, string lettre)
         {
-            this.Chiffre = chiffre;
+            this.BorneB = borneB;
+            this.BorneH = borneH;
             this.Lettre = lettre;
         }
 
-        public float Chiffre { get => chiffre; set => chiffre = value; }
         public string Lettre { get => lettre; set => lettre = value; }
+        public float BorneH { get => borneH; set => borneH = value; }
+        public float BorneB { get => borneB; set => borneB = value; }
     }
 }

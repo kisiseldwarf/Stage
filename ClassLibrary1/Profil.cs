@@ -17,6 +17,14 @@ namespace ClassLibrary1
             this.RulesList = rulesList;
         }
 
+        public void changeProfil(List<Rules> rulesList)
+        {
+            this.rulesList.Clear();
+            for (int i = 0; i < rulesList.Count; i++)
+            {
+                this.rulesList.Add(rulesList[i]);
+            }
+        }
 
         public override string ToString()
         {

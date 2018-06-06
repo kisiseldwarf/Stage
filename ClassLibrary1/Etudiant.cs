@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ClassLibrary1
 {
@@ -11,7 +7,8 @@ namespace ClassLibrary1
         //Classe d'un étudiant
         string nomEtudiant;
         List<Examen> listExam;
-        float moyenne;
+        float moyenneHaute;
+        float moyenneBasse;
 
         public Etudiant()
         {
@@ -20,41 +17,37 @@ namespace ClassLibrary1
         }
 
         public string NomEtudiant { get => nomEtudiant; set => nomEtudiant = value; }
-        public float Moyenne {
-            get
+
+        public float moyenneBorneH()
+        {
+            float addBorneH = 0;
+            int addCoefH = 0;
+            foreach (var exam in listExam)
             {
-                float buffer = 0;
-                int nbItemBuffer=0;
-                foreach (var exam in listExam)
-                {
-                    buffer += exam.Chiffre*exam.Coef;
-                    nbItemBuffer += exam.Coef;
-                }
-                return buffer / nbItemBuffer;
+                addBorneH += exam.NoteBorneH * exam.Coef;
+                addCoefH += exam.Coef;
             }
+            return addBorneH / addCoefH;
+        }
+        public float moyenneBorneB()
+        {
+            float addBorneB = 0;
+            int addCoefB = 0;
+            foreach (var exam in listExam)
+            {
+                addBorneB += exam.NoteBorneB * exam.Coef;
+                addCoefB += exam.Coef;
+            }
+            return addBorneB / addCoefB;
         }
 
         public List<Examen> ListExam { get => listExam; set => listExam = value; }
 
         public void setTheNumbers(Profil profil)
         {
-            if (profil == null)
-                throw new Exception("Profil est null");
-            foreach (var exam in ListExam)
+            foreach (var examen in ListExam)
             {
-                bool notFound = true;
-                foreach (var rule in profil.RulesList)
-                {
-                    if (rule.Lettre == exam.Lettre)
-                    {
-                        exam.Chiffre = rule.Chiffre;
-                        notFound = false;
-                    }
-                }
-                if (notFound == true)
-                {
-                    throw new Exception();
-                }
+                examen.setNumber(profil);
             }
         } //Lettre -> Notes
     }

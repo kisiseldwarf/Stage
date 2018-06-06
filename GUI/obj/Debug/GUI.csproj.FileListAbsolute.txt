@@ -16,3 +16,21 @@ C:\Users\hadikk\Source\Repos\ClassLibrary1\GUI\obj\Debug\GUI.Main.resources
 C:\Users\hadikk\Source\Repos\ClassLibrary1\GUI\obj\Debug\GUI.CreateProfil.resources
 C:\Users\hadikk\Source\Repos\ClassLibrary1\GUI\obj\Debug\GUI.ModifyProfil.resources
 C:\Users\hadikk\Source\Repos\ClassLibrary1\GUI\obj\Debug\GUI.aboutMenu.resources
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\GUI\obj\Debug\GUI.csprojResolveAssemblyReference.cache
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\GUI\obj\Debug\GUI.aboutMenu.resources
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\GUI\obj\Debug\GUI.Main.resources
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\GUI\obj\Debug\GUI.CreateProfil.resources
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\GUI\obj\Debug\GUI.ModifyProfil.resources
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\GUI\obj\Debug\GUI.ModificationPreview.resources
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\GUI\obj\Debug\GUI.Properties.Resources.resources
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\GUI\obj\Debug\GUI.csproj.GenerateResource.Cache
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\GUI\obj\Debug\GUI.csproj.CoreCompileInputs.cache
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\GUI\obj\Debug\GUI.exe
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\GUI\obj\Debug\GUI.pdb
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\GUI\bin\Debug\GUI.exe.config
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\GUI\bin\Debug\GUI.exe
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\GUI\bin\Debug\GUI.pdb
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\GUI\bin\Debug\ClassLibrary1.dll
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\GUI\bin\Debug\ExcelDataReader.dll
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\GUI\bin\Debug\ClassLibrary1.pdb
+C:\Users\hadikk\Source\Repos\ClassLibrary1 - Copie\GUI\bin\Debug\ExcelDataReader.xml

@@ -66,14 +66,14 @@ namespace GUI
             res = Controls.Find("EtudiantTextBox1", true);
             res[0].Text = etudiants[0].NomEtudiant;
             res = Controls.Find("NoteTextBox1", true);
-            res[0].Text = etudiants[0].ListExam.Find(x => x.Id == ex.Id).Chiffre.ToString();
+            res[0].Text = etudiants[0].ListExam.Find(x => x.Id == ex.Id).NoteBorneB.ToString();
             for (int i = 1; i < etudiants.Count; i++)
             {
                 controlID = i + 1;
                 res = Controls.Find("EtudiantTextBox" + controlID, true);
                 res[0].Text = etudiants[i].NomEtudiant;
                 res = Controls.Find("NoteTextBox" + controlID, true);
-                res[0].Text = etudiants[i].ListExam.Find(x => x.Id == ex.Id).Chiffre.ToString();
+                res[0].Text = etudiants[i].ListExam.Find(x => x.Id == ex.Id).NoteBorneB.ToString();
             }
         }
 
